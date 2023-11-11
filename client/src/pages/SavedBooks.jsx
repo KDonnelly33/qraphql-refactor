@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import {
   Container,
   Card,
@@ -14,9 +14,9 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 const SavedBooks = () => {
   // const [userData, setUserData] = useState({});
-const {loading, data } = useQuery(QUERY_ME);
-const userData = data?.me || {};
+const {loading, data, refetch } = useQuery(QUERY_ME);
 const [deleteBook, { error }] = useMutation(REMOVE_BOOK);
+const userData = data?.me || {};
 
  
 
@@ -33,31 +33,27 @@ const [deleteBook, { error }] = useMutation(REMOVE_BOOK);
         variables: { bookId }
       });
 
-      if (error) {
-        throw new Error('something went wrong!');
-      }
-    
       removeBookId(bookId);
-    }catch (err) {
+    } catch (err) {
       console.error(err);
     }
-  };
+  }
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div fluid="true" className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedBooks.length
+          {userData.savedBooks?.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <Row>
-          {userData.savedBooks.map((book) => {
+          {userData.savedBooks?.map((book) => {
             return (
               <Col md="4">
                 <Card key={book.bookId} border='dark'>
