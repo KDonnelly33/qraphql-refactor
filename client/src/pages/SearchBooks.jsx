@@ -25,7 +25,7 @@ const SearchBooks = () => {
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  // learn more here: https://reactjs.org/docs/hooks-effect.htmlsetSearchedBooks#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
@@ -52,6 +52,7 @@ const SearchBooks = () => {
         authors: book.volumeInfo.authors || ['No author to display'],
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
+        link: book.volumeInfo.infoLink,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
 
@@ -76,7 +77,7 @@ const SearchBooks = () => {
 // EDITED THIS PART/////////////////////////////////////////////////////////
     try {
       const { data } = await saveBook({
-        variables: { bookData: { ...bookToSave } },
+        variables: { input: { ...bookToSave } },
       });
       console.log(data);
     
