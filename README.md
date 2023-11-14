@@ -8,7 +8,7 @@ This project was a refactoring of a website from restful-api to graphql. This we
 ## Links
 
 - [Live](https://shielded-temple-63390-b6fc41f9fbc4.herokuapp.com/)
-- [Repo](https://graphql-refactor.herokuapp.com/)
+- [Repo](https://github.com/KDonnelly33/graphql-refactor)
 
 ## Screenshots
 
